@@ -1,7 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import { ScrollView, Text, View } from "react-native";
+import { useEffect, useState } from 'react';
+import { Alert, ScrollView, Text, View } from "react-native";
 import { DAY_SIZE, HabitDay } from "../components/HabitDay";
 import { Header } from "../components/Header";
+import { api } from '../lib/axios';
 import { generateRangeDatesFromYearStart } from '../utils/generate-range-between-dates';
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -10,8 +12,30 @@ const minimumSummaryDatesSize = 18 * 5;
 const amountOfDaysToFill = minimumSummaryDatesSize - datesFromYearStart.length;
 
 export function Home() {
-
+  const [loading, setLoading] = useState(true);
+  const [summary, setSummary] = useState(null);
   const { navigate } = useNavigation();
+
+  async function fechData() {
+    try {
+      setLoading(true);
+
+      const response = await api.get('/summary');
+
+      console.log(response.data);
+      setSummary(response.data);
+
+    } catch (error) {
+      Alert.alert('Eita!', 'Erro da peste no servidor!')
+
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    fechData();
+  },[])
 
   return (
     <View className="flex-1 bg-background px-8 pt-16">
