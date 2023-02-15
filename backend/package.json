@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "habit",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "dev": "tsx watch src/server.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Emanoel Antonio",
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^8.2.0",
