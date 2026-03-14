@@ -13,3 +13,4 @@
 *.pid
 *.seed
 *.pid.lock
+package-lock.json
